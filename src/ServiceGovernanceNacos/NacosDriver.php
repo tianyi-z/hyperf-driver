@@ -14,6 +14,7 @@ class NacosDriver extends \Hyperf\ServiceGovernanceNacos\NacosDriver
 {
     public function getNodes(string $uri, string $name, array $metadata): array
     {
+        $groupName = $this->config->get('services.drivers.nacos.group_name');
         $namespaceId = $this->config->get('services.drivers.nacos.namespace_id');
         $consumers = $this->config->get('services.consumers');
         if (!empty($consumers) && is_array($consumers)) {
@@ -21,9 +22,12 @@ class NacosDriver extends \Hyperf\ServiceGovernanceNacos\NacosDriver
             if (!empty($consumers[$name]['namespace_id'])) {
                 $namespaceId = $consumers[$name]['namespace_id'];
             }
+            if (!empty($consumers[$name]['group_name'])) {
+                $groupName = $consumers[$name]['group_name'];
+            }
         }
         $response = $this->client->instance->list($name, [
-            'groupName' => $this->config->get('services.drivers.nacos.group_name'),
+            'groupName' => $groupName,
             'namespaceId' => $namespaceId,
         ]);
         if ($response->getStatusCode() !== 200) {
