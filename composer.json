@@ -1,0 +1,16 @@
+{
+    "name": "yuanxinhealthy/hyperf-driver",
+    "description": "需要替换的dir",
+    "autoload": {
+        "psr-4": {
+            "YuanxinHealthy\\HyperfDriver\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zhangtianyi",
+            "email": "zhangtianyi@yuanxinjituan.com"
+        }
+    ],
+    "require": {}
+}
